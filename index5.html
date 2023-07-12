@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm" onsubmit="validateForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <span id="nameError" class="error"></span>
+
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <span id="emailError" class="error"></span>
+
+        <br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required>
+        <span id="phoneError" class="error"></span>
+
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <span id="passwordError" class="error"></span>
+
+        <br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="18" max="99" required>
+        <span id="ageError" class="error"></span>
+
+        <br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" required>
+            <option value=""></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <span id="genderError" class="error"></span>
+
+        <br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+        <span id="dateError" class="error"></span>
+
+        <br>
+
+        <label for="color">Favorite Color:</label>
+        <input type="color" id="color" required>
+        <span id="colorError" class="error"></span>
+
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+
+            // Reset error messages
+            document.querySelectorAll('.error').forEach(function (error) {
+                error.textContent = '';
+            });
+
+            var nameInput = document.getElementById('name');
+            var emailInput = document.getElementById('email');
+            var phoneInput = document.getElementById('phone');
+            var passwordInput = document.getElementById('password');
+            var ageInput = document.getElementById('age');
+            var genderInput = document.getElementById('gender');
+            var dateInput = document.getElementById('date');
+            var colorInput = document.getElementById('color');
+
+            var isValid = true;
+
+            // Name validation
+            if (nameInput.value.trim() === '') {
+                document.getElementById('nameError').textContent = 'Name is required';
+                isValid = false;
+            }
+
+            // Email validation
+            if (emailInput.value.trim() === '') {
+                document.getElementById('emailError').textContent = 'Email is required';
+                isValid = false;
+            } else if (!validateEmail(emailInput.value.trim())) {
+                document.getElementById('emailError').textContent = 'Invalid email format';
+                isValid = false;
+            }
+
+            // Phone number validation
+            if (phoneInput.value.trim() === '') {
+                document.getElementById('phoneError').textContent = 'Phone number is required';
+                isValid = false;
+            } else if (!validatePhone(phoneInput.value.trim())) {
+                document.getElementById('phoneError').textContent = 'Invalid phone number format';
+                isValid = false;
+            }
+
+            // Password validation
+            if (passwordInput.value.trim() === '') {
+                document.getElementById('passwordError').textContent = 'Password is required';
+                isValid = false;
+            }
+
+            // Age validation
+            if (ageInput.value === '') {
+                document.getElementById('ageError').textContent = 'Age is required';
+                isValid = false;
+            } else if (ageInput.value < 18 || ageInput.value > 99) {
+                document.getElementById('ageError').textContent = 'Age must be between 18 and 99';
+                isValid = false;
+            }
+
+            // Gender validation
+            if (genderInput.value === '') {
+                document.getElementById('genderError').textContent = 'Gender is required';
+                isValid = false;
+            }
+
+            // Date validation
+            if (dateInput.value.trim() === '') {
+                document.getElementById('dateError').textContent = 'Date is required';
+                isValid = false;
+            }
+
+            // Color validation
+            if (colorInput.value.trim() === '') {
+                document.getElementById('colorError').textContent = 'Color is required';
+                isValid = false;
+            }
+
+            // Submit the form if valid
+            if (isValid) {
+                document.getElementById('myForm').submit();
+            }
+        }
+
+        // Email format validation
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        // Phone number format validation
+        function validatePhone(phone) {
+            var re = /^\d{10}$/;
+            return re.test(phone);
+        }
+    </script>
+</body>
+</html>
