@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #input-box {
+            margin-bottom: 10px;
+        }
+
+        #result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input id="input-box" type="text">
+    <button onclick="addItem()">Submit</button>
+
+    <div id="result"></div>
+
+    <script>
+        function addItem() {
+            var input = document.getElementById("input-box");
+            var value = input.value;
+
+            if (value.trim() !== "") {
+                var result = document.getElementById("result");
+                var newItem = document.createElement("p");
+                newItem.textContent = value;
+                result.appendChild(newItem);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
